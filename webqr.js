@@ -10,8 +10,9 @@ var webkit=false;
 var moz=false;
 var v=null;
 
+
 var imghtml='<div id="qrfile"><canvas id="out-canvas" width="320" height="240"></canvas>'+
-    '<div id="imghelp">drag and drop a QRCode here'+
+    '<div id="imghelp">drag and drop FarmNet QRCode here'+
 	'<br>or select a file'+
 	'<input type="file" onchange="handleFiles(this.files)"/>'+
 	'</div>'+
@@ -103,11 +104,22 @@ function htmlEntities(str) {
 
 function read(a)
 {
+    console.log(a);
     var html="<br>";
     if(a.indexOf("http://") === 0 || a.indexOf("https://") === 0)
         html+="<a target='_blank' href='"+a+"'>"+a+"</a><br>";
     html+="<b>"+htmlEntities(a)+"</b><br><br>";
-    document.getElementById("result").innerHTML=html;
+
+    console.log('api call to server initiated');
+    toggle_hide();
+    //document.getElementById("result").innerHTML=html;
+    //push data to table
+    document.getElementById("result").innerHTML="<img src=\"verifying.gif\" alt=\"- Verifying -\" height=\"150\" width=\"150\"><br><p>Verifying</p>";
+    qr_fetch_details(a); 
+
+
+
+
 }	
 
 function isCanvasSupported(){
@@ -182,7 +194,8 @@ function setwebcam()
 function setwebcam2(options)
 {
 	console.log(options);
-	document.getElementById("result").innerHTML="- scanning -";
+    document.getElementById("result").innerHTML="<img src=\"spinner.gif\" alt=\"- Scanning -\" height=\"50\" width=\"50\"><br><p>Scanning</p>";
+    hide_components();
     if(stype==1)
     {
         setTimeout(captureToCanvas, 500);    

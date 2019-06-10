@@ -1,165 +1,494 @@
 <html>
 
-<!-- Mirrored from webqr.com/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 09 Jun 2019 10:44:09 GMT -->
 <head>
-  <meta name="description" content="QR Code scanner" />
-  <meta name="keywords" content="qrcode,qr code,scanner,barcode,javascript" />
-  <meta name="language" content="English" />
-  <meta name="copyright" content="Lazar Laszlo (c) 2011" />
-  <meta name="Revisit-After" content="1 Days"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Web QR</title>
+    <meta name="description" content="QR Code scanner" />
+    <meta name="keywords" content="qrcode,qr code,scanner,barcode,javascript" />
+    <meta name="language" content="English" />
+    <meta name="copyright" content="Lazar Laszlo (c) 2011" />
+    <meta name="Revisit-After" content="1 Days" />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FarmNet Certificate Verification Application</title>
+    <link rel="icon" href="favicon.ico">
+    <style type="text/css">
+        body {
+            width: 100%;
+            text-align: center;
+        }
 
-<style type="text/css">
-body{
-    width:100%;
-    text-align:center;
-}
-img{
-    border:0;
-}
-#main{
-    margin: 15px auto;
-    background:white;
-    overflow: auto;
-	width: 100%;
-}
-#header{
-    background:white;
-    margin-bottom:15px;
-}
-#mainbody{
-    background: white;
-    width:100%;
-	display:none;
-}
-#footer{
-    background:white;
-}
-#v{
-    width:320px;
-    height:240px;
-}
-#qr-canvas{
-    display:none;
-}
-#qrfile{
-    width:320px;
-    height:240px;
-}
-#mp1{
-    text-align:center;
-    font-size:35px;
-}
-#imghelp{
-    position:relative;
-    left:0px;
-    top:-160px;
-    z-index:100;
-    font:18px arial,sans-serif;
-    background:#f0f0f0;
-	margin-left:35px;
-	margin-right:35px;
-	padding-top:10px;
-	padding-bottom:10px;
-	border-radius:20px;
-}
-.selector{
-    margin:0;
-    padding:0;
-    cursor:pointer;
-    margin-bottom:-5px;
-}
-#outdiv
-{
-    width:320px;
-    height:240px;
-	border: solid;
-	border-width: 3px 3px 3px 3px;
-}
-#result{
-    border: solid;
-	border-width: 1px 1px 1px 1px;
-	padding:20px;
-	width:70%;
-}
+        img {
+            border: 0;
+        }
 
-ul{
-    margin-bottom:0;
-    margin-right:40px;
-}
-li{
-    display:inline;
-    padding-right: 0.5em;
-    padding-left: 0.5em;
-    font-weight: bold;
-    border-right: 1px solid #333333;
-}
-li a{
-    text-decoration: none;
-    color: black;
-}
+        #main {
+            /* margin: 15px auto; */
+            background: white;
+            overflow: auto;
+            width: 100%;
+        }
 
-#footer a{
-	color: black;
-}
-.tsel{
-    padding:0;
-}
+        #header {
+            background: white;
+            margin-bottom: 0px;
+        }
 
-</style>
+        #mainbody {
+            background: white;
+            width: 100%;
+            display: none;
+        }
 
-<script type="text/javascript" src="llqrcode.js"></script>
-<script type="text/javascript" src="../apis.google.com/js/plusone.js"></script>
-<script type="text/javascript" src="webqr.js"></script>
+        #footer {
+            background: white;
+        }
 
+        #v {
+            width: 320px;
+            height: 240px;
+        }
+
+        #qr-canvas {
+            display: none;
+        }
+
+        #qrfile {
+            width: 320px;
+            height: 240px;
+        }
+
+        #mp1 {
+            text-align: center;
+            font-size: 35px;
+        }
+
+        #imghelp {
+            position: relative;
+            left: 0px;
+            top: -160px;
+            z-index: 100;
+            font: 18px arial, sans-serif;
+            background: #f0f0f0;
+            margin-left: 35px;
+            margin-right: 35px;
+            padding-top: 10px;
+            padding-bottom: 0px;
+            border-radius: 20px;
+        }
+
+        .selector {
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            margin-bottom: -5px;
+        }
+
+        #outdiv {
+            width: 320px;
+            height: 240px;
+            border: solid;
+            border-width: 0px 0px 0px 0px;
+        }
+
+        #result {
+            border: solid;
+            border-width: 0px 0px 0px 0px;
+            padding: 20px;
+            width: 70%;
+        }
+
+        ul {
+            margin-bottom: 0;
+            margin-right: 40px;
+        }
+
+        li {
+            display: inline;
+            padding-right: 0.5em;
+            padding-left: 0.5em;
+            font-weight: bold;
+            border-right: 1px solid #333333;
+        }
+
+        li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        #footer a {
+            color: black;
+        }
+
+        .tsel {
+            padding: 0;
+        }
+    </style>
+<!-- Core CSS - Include with every page -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<!-- Page-Level Plugin CSS - Blank -->
+
+<!-- SB Admin CSS - Include with every page -->
+<link href="css/sb-admin-print.css" rel="stylesheet">
+<style>
+.badge-success{color:#fff;background-color:#28a745}
+.badge-success[href]:focus,.badge-success[href]:hover{color:#fff;text-decoration:none;background-color:#1e7e34}
+.badge-info{color:#fff;background-color:#17a2b8}
+.badge-info[href]:focus,.badge-info[href]:hover{color:#fff;text-decoration:none;background-color:#117a8b}
+.badge-warning{color:#212529;background-color:#ffc107}
+.badge-warning[href]:focus,.badge-warning[href]:hover{color:#212529;text-decoration:none;background-color:#d39e00}
+.badge-danger{color:#fff;background-color:#dc3545}
+.badge-danger[href]:focus,.badge-danger[href]:hover{color:#fff;text-decoration:none;background-color:#bd2130}
+.badge-light{color:#212529;background-color:#f8f9fa}
+.badge-light[href]:focus,.badge-light[href]:hover{color:#212529;text-decoration:none;background-color:#dae0e5}
+.badge-primary{color:#fff;background-color:#007bff}a.badge-primary:focus,a.badge-primary:hover{color:#fff;background-color:#0062cc}a.badge-primary.focus,a.badge-primary:focus{outline:0;-webkit-box-shadow:0 0 0 .2rem rgba(0,123,255,.5);box-shadow:0 0 0 .2rem rgba(0,123,255,.5)}
+
+</style><!-- form Scripts -->
+<link rel="stylesheet" href="assets/css/stacklark-components.css">
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+ <!-- form Scripts ends-->
+    <script>
+    function toggle_hide() {
+        $("#hidethis").hide();
+        //document.getElementById("hidethis").style.display = 'none';
+    /* if( document.getElementById("hidethis").style.display=='none' ){
+       document.getElementById("hidethis").style.display = '';
+     }else{
+       document.getElementById("hidethis").style.display = 'none';
+     }*/
+    }
+    </script>
+    <script>
+            var FARMNET_API_KEY="RUGJGD0UMa41OWH4xV8DpcMTUbri6xcZ";
+            function qr_fetch_details(HASH_KEY){
+                              var opts = {
+                                  "closeButton": true,
+                                  "debug": false,
+                                  "positionClass": "toast-top-full-width",
+                                  "onclick": null,
+                                  "showDuration": "300",
+                                  "hideDuration": "1000",
+                                  "timeOut": "5000",
+                                  "extendedTimeOut": "1000",
+                                  "showEasing": "swing",
+                                  "hideEasing": "linear",
+                                  "showMethod": "fadeIn",
+                                  "hideMethod": "fadeOut"
+                              };
+                   var request_data =  $.ajax({
+                   url: "http://192.168.1.100:5000/api/verify_hash",
+                   method: 'POST',
+                   contentType: "application/json",
+                   dataType: 'json',
+                   data: JSON.stringify({
+                          api_key : FARMNET_API_KEY,
+                          validation_hash : HASH_KEY
+                                       })
+               });
+               request_data.success(function(response){
+                      show_loading_bar({
+                                           delay: .5,
+                                           pct: 100,
+                                           finish: function() {
+                                                if(response.status===200){
+                                                    if(response.data.valid){
+                                                        toastr.success("Certificate Verified Successfully", '' , opts);
+                                                        //show certificate
+                                                        var issue_date = new Date(response.data.issue_date);
+                                                        var exp_date = new Date(issue_date);
+                                                        exp_date.setDate(exp_date.getDate() + response.data.validity);
+                                                        view_components();
+                                                        $('#certificate').css('visibility','visible');
+                                                        document.getElementById("result").innerHTML="<img src=\"original.jpg\"height=\"100\" width=\"100\"/><br><p>Certificate Verified Successfully.</p>";
+                                                        $('#cert_table').find('tr#row01').find('td#cert_issue_date').html('<code>'+issue_date.toLocaleString('ca','Asia/Kolkata')+'</code>');
+                                                        $('#cert_table').find('tr#row02').find('td#cert_exp_date').html('<code>'+exp_date.toLocaleString('ca','Asia/Kolkata')+'</code>');
+                                                                                                    
+                                                        $('#cert_farmer_table').find('tr#row1').find('td#farmer_name').html(response.data.farmer_snapshot.fname+' '+response.data.farmer_snapshot.lname);
+                                                        $('#cert_farmer_table').find('tr#row2').find('td#farmer_adno').html('<code>'+response.data.farmer_snapshot.aadhaar_no+'</code>');
+                                                        $('#cert_farmer_table').find('tr#row3').find('td#farmer_phno').html(response.data.farmer_snapshot.phno);
+                                                        $('#cert_farmer_table').find('tr#row4').find('td#farmer_email').html(response.data.farmer_snapshot.email);
+                                                        $('#cert_farmer_table').find('tr#row5').find('td#farmer_addr').html(response.data.farmer_snapshot.address_line1+'<br>'+response.data.farmer_snapshot.address_line2);
+                                                        $('#cert_farmer_table').find('tr#row6').find('td#farmer_lndk').html(response.data.farmer_snapshot.lndmrk);
+                                                        $('#cert_farmer_table').find('tr#row7').find('td#farmer_state').html(response.data.farmer_snapshot.state);
+                                                        $('#cert_farmer_table').find('tr#row71').find('td#farmer_district').html(response.data.farmer_snapshot.district);
+                                                        $('#cert_farmer_table').find('tr#row72').find('td#farmer_taluk').html(response.data.farmer_snapshot.taluk);
+                                                        $('#cert_farmer_table').find('tr#row73').find('td#farmer_village').html(response.data.farmer_snapshot.village);
+                                                        $('#cert_farmer_table').find('tr#row8').find('td#farmer_pin').html(response.data.farmer_snapshot.pin);
+                                                        $('#cert_farmer_table').find('tr#row9').find('td#farmer_loc').html(response.data.farmer_snapshot.farm_location);
+
+                                                        $('#cert_officer_table').find('tr#row11').find('td#officer_name').html(response.data.officer_snapshot.fname+' '+response.data.officer_snapshot.lname);
+                                                        $('#cert_officer_table').find('tr#row12').find('td#officer_desig').html('<code>'+response.data.officer_snapshot.designation+'</code>');
+                                                        $('#cert_officer_table').find('tr#row13').find('td#officer_phno').html(response.data.officer_snapshot.phno);
+                                                        $('#cert_officer_table').find('tr#row14').find('td#officer_email').html(response.data.officer_snapshot.email);
+                                                        $('#cert_officer_table').find('tr#row15').find('td#officer_state').html(response.data.officer_snapshot.state);
+                                                        $('#cert_officer_table').find('tr#row151').find('td#officer_district').html(response.data.officer_snapshot.district);
+                                                        $('#cert_officer_table').find('tr#row152').find('td#officer_taluk').html(response.data.officer_snapshot.taluk);
+                                                        $('#cert_officer_table').find('tr#row153').find('td#officer_village').html(response.data.officer_snapshot.village);
+                                                        $('#cert_officer_table').find('tr#row16').find('td#officer_pin').html(response.data.officer_snapshot.pin);
+                                                        $('#cert_officer_table').find('tr#row17').find('td#officer_loc').html(response.data.officer_snapshot.office_location);
+                                                        $('#cert_officer_table').find('tr#row18').find('td#officer_ophno').html(response.data.officer_snapshot.office_phno);
+
+
+
+                                                        }
+                                                        
+                                                    else if(response.data.suspended){
+                                                        toastr.error("Certificate has been Suspended", '' , opts);
+                                                        $("#done").show();
+                                                        document.getElementById("result").innerHTML="<img src=\"suspended.svg\"height=\"100\" width=\"100\"/><br><p>Certificate has been Suspended.</p>";
+                                                    }
+                                                    else{
+                                                        $("#done").show();
+                                                        document.getElementById("result").innerHTML="<img src=\"expired.jpg\"height=\"100\" width=\"125\"/><br><p>Certificate has been Expired.</p>";
+                                                        toastr.error("Certificate has been Expired", '' , opts);
+                                                    }
+                                                    
+                                                }
+                                                else if(response.status===400){//no cert
+                                                    document.getElementById("result").innerHTML="<img src=\"notexist.png\"height=\"100\" width=\"100\"/><br><p>Certificate Doesn't Exist.</p>";
+                                                    $("#done").show();
+                                                    toastr.error("Certificate Doesn't Exist.", '' , opts);
+
+                                                }else if(response.status===500){//key invalid
+                                                    document.getElementById("result").innerHTML="<img src=\"apierror.png\"height=\"100\" width=\"100\"/><br><p>API KEY INVALID.</p>";
+                                                    $("#done").show();
+                                                    toastr.error("Please contact FarmNet CVA Technical Support Team.", 'API KEY INVALID' , opts);
+                                                }
+                                           console.log(response);  
+                                           }
+                                           });                        
+                                        });
+                                       }
+           </script>
 
 </head>
 
 <body>
-<div id="main">
-<div id="header">
-<div style="position:relative;top:+20px;left:0px;"><g:plusone size="medium"></g:plusone></div>
-<p id="mp1">
-QR Code scanner
-</p>
-<ul>
-<li><a href="index.html">Scan</a></li>
-<li><a href="create.html">Create</a></li>
-<li><a href="about.html">About</a></li>
-<li style="border: medium none;"><a href="contact.html">Contact</a></li>
-</ul>
+        <div class="container"style="padding:0px;">
+                <div class="row justify-content-center">
+                <div class="col-md-5 col-md-offset-4">
+    <div id="main">
+                        <div id="header">
+                                <div style="position:relative;top:+20px;left:0px;">
+                                    <g:plusone size="medium"></g:plusone>
+                                </div>
+                                <p id="mp1">
+                                    FarmNet CVA <br>
+                                    <h4 class="text-center">Certificate Verification Application</h4>
+                                </p>
+                            </div>
+        <div id="mainbody">
+            
+            <table class="tsel" border="0" width="100%">
+                <tr id="hidethis">
+                    <td valign="top" align="center" width="50%">
+                        <table class="tsel" border="0">
+                            <tr>
+                                <td><img class="selector" id="webcamimg" src="vid.png" onclick="setwebcam()"
+                                        align="left" /></td>
+                                <td><img class="selector" id="qrimg" src="cam.png" onclick="setimg()" align="right" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <div id="outdiv">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center">
+                        <div id="result"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>&nbsp;
+
+
+    <canvas id="qr-canvas" width="800" height="600"></canvas>
+<div class="panel panel-default login-panel" id="certificate"style="margin-top:0px;visibility: hidden;">
+            <div class="panel-body">
+                    <h4><strong>FarmNet Certificate</strong></h4>
+                    <div class="table-responsive">
+                                <table class="table table-bordered table-striped"id="cert_table">
+                                    <tbody>
+                                        <tr id="row01">
+                                            <th>Issue Date & Time</th>
+                                            <td  id="cert_issue_date"></td>
+                                            
+                                        </tr>
+                                        <tr id="row02">
+                                            <th>Expiration Date & Time</th>
+                                            <td  id="cert_exp_date"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+
+                    </div>
+                    <h5><strong>Farmer Details</strong></h5>
+                    <div class="table-responsive">
+                                <table class="table table-bordered table-striped"id="cert_farmer_table">
+                                    <tbody>
+                                    <tr id="row1">
+                                            <th>Farmer Name</th>
+                                            <td id="farmer_name"></td>
+                                        </tr>
+                                        <tr id="row2">
+                                            <th>Aadhaar Number</th>
+                                            <td id="farmer_adno"></td>
+                                        </tr>
+                                        <tr id="row3">
+                                            <th>Phone Number</th>
+                                            <td id="farmer_phno"></td>
+                                        </tr>
+                                        <tr id="row4">
+                                            <th>Email</th>
+                                            <td id="farmer_email"></td>
+                                        </tr>
+                                        <tr id="row5">
+                                            <th>Address</th>
+                                            <td id="farmer_addr"></td>
+                                        </tr>
+                                        <tr id="row6">
+                                            <th>Landmark</th>
+                                            <td id="farmer_lndk"></td>
+                                        </tr>
+                                        <tr id="row7">
+                                            <th>State</th>
+                                            <td id="farmer_state"></td>
+                                        </tr>
+                                        <tr id="row71">
+                                                <th>District</th>
+                                                <td  id="farmer_district"></td>
+                                            </tr>
+                                        <tr id="row72">
+                                             <th>Taluk</th>
+                                            <td  id="farmer_taluk"></td>
+                                        </tr>
+                                        <tr id="row73">
+                                            <th>Village</th>
+                                            <td  id="farmer_village"></td>
+                                        </tr>
+                                        <tr id="row8">
+                                            <th>Pin Code</th>
+                                            <td  id="farmer_pin"></td>
+                                        </tr>
+                                        <tr id="row9">
+                                            <th>Farm Location</th>
+                                            <td  id="farmer_loc"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                    </div>
+                    <h5><strong>Approved Officer Details</strong></h5>
+                    <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="cert_officer_table">
+                                    <tbody>
+                                        <tr id="row11">
+                                            <th>Officer Name</th>
+                                            <td id="officer_name"></td>
+                                        </tr>
+                                        <tr id="row12">
+                                            <th>Designation</th>
+                                            <td id="officer_desig"></td>
+                                        </tr>
+                                        <tr id="row13">
+                                            <th>Phone Number</th>
+                                            <td id="officer_phno"></td>
+                                        </tr>
+                                        <tr id="row14">
+                                            <th>Email</th>
+                                            <td id="officer_email"></td>
+                                        </tr>
+                                        <tr id="row15">
+                                                <th>State</th>
+                                                <td id="officer_state"></td>
+                                            </tr>
+                                            <tr id="row151">
+                                                    <th>District</th>
+                                                    <td  id="officer_district"></td>
+                                                </tr>
+                                            <tr id="row152">
+                                                 <th>Taluk</th>
+                                                <td  id="officer_taluk"></td>
+                                            </tr>
+                                            <tr id="row153">
+                                                <th>Village</th>
+                                                <td  id="officer_village"></td>
+                                            </tr>
+                                        <tr id="row16">
+                                            <th>Pin Code</th>
+                                            <td id="officer_pin"></td>
+                                        </tr>
+                                        <tr id="row17">
+                                            <th>Office Location</th>
+                                            <td id="officer_loc"></td>
+                                        </tr>
+                                        <tr id="row18">
+                                            <th>Office Phone Number</th>
+                                            <td id="officer_ophno"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                </div>
+            </div>
 </div>
-<div id="mainbody">
-<table class="tsel" border="0" width="100%">
-<tr>
-<td valign="top" align="center" width="50%">
-<table class="tsel" border="0">
-<tr>
-<td><img class="selector" id="webcamimg" src="vid.png" onclick="setwebcam()" align="left" /></td>
-<td><img class="selector" id="qrimg" src="cam.png" onclick="setimg()" align="right"/></td></tr>
-<tr><td colspan="2" align="center">
-<div id="outdiv">
-</div></td></tr>
-</table>
-</td>
-</tr>
-<tr><td colspan="3" align="center">
-<img src="down.png"/>
-</td></tr>
-<tr><td colspan="3" align="center">
-<div id="result"></div>
-</td></tr>
-</table>
-</div>&nbsp;
+<div class="panel-footer">
+        <a id="done"href="#"class="btn btn-success">Done</a>                  
+       </div>
+</div>
 
 </div>
-<canvas id="qr-canvas" width="800" height="600"></canvas>
-<script type="text/javascript">load();</script>
+</div>
+</div>
+<script>
+    
+                function hide_components(){
+                        $("#certificate").hide();
+                        $("#done").hide();
+                    }
+                function view_components(){
+                        $("#certificate").show();
+                        $("#done").show();
+                    }
+                    $("#done").click(function(){
+                            hide_components()
+                            $("#hidethis").show();
+                            load();
+                            document.getElementById("result").innerHTML="<img src=\"spinner.gif\" alt=\"- Scanning -\" height=\"50\" width=\"50\"><br><p>Scanning</p>";
+                    }); 
+
+</script>
+<script type="text/javascript" src="llqrcode.js"></script>
+<script type="text/javascript" src="webqr.js"></script>
+    <script type="text/javascript">
+        load();
+    </script>
+    
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/TweenMax.min.js"></script>
+    <script src="assets/js/stacklark-api.js"></script>
+    <script src="assets/js/jquery-validate/jquery.validate.min.js"></script>
+    <script src="assets/js/toastr/toastr.min.js"></script>
+    <script src="assets/js/stacklark-custom.js"></script>
+    <!-- form Scripts ends-->
+
+
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <!-- Page-Level Plugin Scripts - Tables -->
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="js/sb-admin.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 </body>
 
-
-<!-- Mirrored from webqr.com/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 09 Jun 2019 10:44:19 GMT -->
 </html>
